@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_export.c                                       :+:      :+:    :+:   */
+/*   parse_input.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/24 02:37:59 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/24 23:50:47 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/04/24 22:36:55 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/04/24 22:36:55 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd_export.h"
+#ifndef PARSE_INPUT_H
+# define PARSE_INPUT_H
 
-#include "environ.h"
+int	parse_input(char *str);
 
-int	cmd_export(char *str, int in_fd, int out_fd)
-{
-	environ_add(str);
-}
+#endif // PARSE_INPUT_H

@@ -6,13 +6,13 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 21:13:04 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/24 21:13:33 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/24 23:50:37 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMD_UNSET_H
 #define CMD_UNSET_H
 
-int	cmd_unset(char *str);
+int	cmd_unset(char *str, int in_fd, int out_fd);
 
 #endif // CMD_UNSET_H

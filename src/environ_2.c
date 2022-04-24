@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 20:39:17 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/24 21:34:37 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/25 01:59:22 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include <unistd.h>
 
 #include "libft.h"
-
-extern char	**environ;
 
 void	environ_cleanup(void)
 {
@@ -31,22 +29,19 @@ void	environ_cleanup(void)
 
 int	environ_init(void)
 {
-	char	**env;
 	char	**it;
 
 	it = environ;
-	environ_print();
-	env = malloc(sizeof(char *));
-	if (*env)
+	//printf("it: %p, environ: %pn\n", it, environ);
+	environ = malloc(sizeof(char *));
+	if (!environ)
 		return (1);
-	*env = NULL;
-	environ = env;
+	*environ = NULL;
 	while (*it)
 	{
-		environ_print();
+		//printf("adding %s\n", *it);
 		if (environ_add(*it))
 		{
-			environ_cleanup();
 			return (1);
 		}
 		it++;

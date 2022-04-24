@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 20:23:02 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/24 21:26:45 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/24 22:31:45 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,28 @@
 
 #include "environ.h"
 #include "libft.h"
+#include "cmds.h"
 
 static const char promt[] = { 0xE2, 0x9E, 0x9C, ' ', '\0'};
 
 int	minishell()
 {
-	char		*buf;
+	char			*buf;
+	t_cmd_function	command_function;
 
 	if (environ_init())
 		return (1);
-	environ_print();
-	// environ_remove(env, "_");
-	// environ_add(env, "ZZZ", "trololo");
-	// environ_debug_print(env);
-	// while (1)
-	// {
-	// 	buf = readline(promt);
-	// 	add_history(buf);
+	while (1)
+	{
+		buf = readline(promt);
+		add_history(buf);
 
-	// 	if (ft_strncmp(buf, "exit", 4) == 0)
-	// 		return (0);
-	// }
+		if (ft_strncmp(buf, "exit", 4) == 0)
+			return (0);
+		command_function = get_function(buf);
+		printf("got %p", command_function);
+		// if (command_function)
+		// 	command_function(buf);
+	}
 	return (0);
 }

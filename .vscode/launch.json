@@ -12,11 +12,8 @@
 		  "env": {
 			"TEST_VAR": "foo"
 		  },
-		  "args": [
-		  ],
 		  "stopAtEntry": true,
 		  "cwd": "${workspaceFolder}",
-
 		  "externalConsole": false,
 		  "MIMode": "lldb",
 		  //"preLaunchTask": "clang++ build active file"

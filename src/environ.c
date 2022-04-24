@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 22:52:53 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/24 21:31:40 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/24 22:28:03 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 static int	key_comp(char *key1, char *key2)
 {
-	printf("%s, %s\n", key1, key2);
+	//printf("%s, %s\n", key1, key2);
 	while (*key1 && *key2 && *key1 != '=')
 	{
 		if (*key1 != *key2)
@@ -41,7 +41,7 @@ static int	environ_add_copy(char **old, char *new)
 		return (1);
 	free(*old);
 	*old = new_entry;
-	*(old + 1) = NULL;
+
 	return (0);
 }
 
@@ -64,11 +64,12 @@ int	environ_add(char *new_entry)
 		new_env = malloc(sizeof(char **) * (size + 20));
 		if (!new_env)
 			return (1);
-		ft_memcpy(new_env, *environ, size * sizeof(char *));
+		ft_memcpy(new_env, environ, size * sizeof(char *));
 		free(environ);
 		environ = new_env;
 		old = new_env + size;
 		*old = NULL;
+		*(old + 1) = NULL;
 	}
 	return (environ_add_copy(old, new_entry));
 }
