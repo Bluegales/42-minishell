@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environ.h                                          :+:      :+:    :+:   */
+/*   cmd_export.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/23 22:52:50 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/24 21:26:51 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/04/24 02:38:07 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/04/24 20:52:33 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIRON_H
-# define ENVIRON_H
+#ifndef CMD_EXPORT_H
+# define CMD_EXPORT_H
 
-extern char	**environ;
+int	cmd_export(char *str);
 
-int		environ_init(void);
-void	environ_cleanup(void);
-int		environ_add(char *new_entry);
-void	environ_remove(char *entry);
-
-void	environ_print(void);
-
-#endif // ENVIRON_H
+#endif // CMD_EXPORT_H

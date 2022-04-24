@@ -9,13 +9,14 @@
 		  "type": "cppdbg",
 		  "request": "launch",
 		  "program": "${workspaceFolder}/minishell",
+		  "env": {
+			"TEST_VAR": "foo"
+		  },
 		  "args": [
 		  ],
 		  "stopAtEntry": true,
 		  "cwd": "${workspaceFolder}",
-		  "env": {
-			"TEST_VAR": "foo"
-		  },
+
 		  "externalConsole": false,
 		  "MIMode": "lldb",
 		  //"preLaunchTask": "clang++ build active file"

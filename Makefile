@@ -6,7 +6,7 @@
 #    By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/10 12:13:51 by pfuchs            #+#    #+#              #
-#    Updated: 2022/04/24 00:39:28 by pfuchs           ###   ########.fr        #
+#    Updated: 2022/04/24 20:43:03 by pfuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGSS	= -Wall -Wextra -g #-Werror -g
 INCFLAG	= -I include -I libft
 # File Variables
 NAME	= minishell
-SRC_N	= main minishell environ
+SRC_N	= main minishell environ environ_2
 SRC		= $(addsuffix .c,$(SRC_N))
 OBJ		= $(addprefix _bin/,$(notdir $(SRC:.c=.o)))
 
