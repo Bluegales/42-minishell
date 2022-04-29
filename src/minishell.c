@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 20:23:02 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/24 22:31:45 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/29 10:34:50 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <readline/readline.h>
 
 #include "environ.h"
+#include "parse.h"
 #include "libft.h"
 #include "cmds.h"
 
@@ -34,8 +35,9 @@ int	minishell()
 
 		if (ft_strncmp(buf, "exit", 4) == 0)
 			return (0);
-		command_function = get_function(buf);
-		printf("got %p", command_function);
+		parse(&buf);
+		//command_function = get_function(buf);
+		//printf("got %p", command_function);
 		// if (command_function)
 		// 	command_function(buf);
 	}

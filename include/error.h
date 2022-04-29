@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environ.h                                          :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/23 22:52:50 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/29 08:15:45 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/04/29 00:19:01 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/04/29 00:47:45 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIRON_H
-# define ENVIRON_H
+#ifndef ERROR_H
+# define ERROR_H
 
-extern char	**environ;
+# define ERR_ALLOC_FAIL 1
 
-int		environ_init(void);
-void	environ_cleanup(void);
-int		environ_add(char *new_entry);
-void	environ_remove(char *entry);
-char	*environ_get(char *entry);
+enum e_error {
+	e_alloc_fail = 1,
+};
 
-void	environ_print(void);
+void	error(enum e_error error);
 
-#endif // ENVIRON_H
+#endif // ERROR_H

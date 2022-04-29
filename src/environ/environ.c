@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 22:52:53 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/24 22:28:03 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/29 10:32:43 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <stdlib.h>
 
 #include "libft.h"
+
+#include <stdio.h>
 
 static int	key_comp(char *key1, char *key2)
 {
@@ -28,6 +30,9 @@ static int	key_comp(char *key1, char *key2)
 		key1++;
 		key2++;
 	}
+	if (*key1 == '\0' || *key2 == '\0')
+		if (*key1 == '=' || *key2 == '=')
+			return (0);
 	return (*key1 - *key2);
 }
 
@@ -74,19 +79,27 @@ int	environ_add(char *new_entry)
 	return (environ_add_copy(old, new_entry));
 }
 
-// int	environ_get(t_environ env, char *key, char **return_value)
-// {
-// 	while (*env)
-// 	{
-// 		if (ft_strncmp(*env, key, SIZE_MAX))
-// 		{
-// 			*return_value = *(env + 1);
-// 		}
-// 		return (*(env + 1));
-// 		env += 2;
-// 	}
-// 	return (NULL);
-// }
+char	*environ_get(char *entry)
+{
+	char	**env_it;
+	char	*value;
+
+	env_it = environ;
+	while (*env_it)
+	{
+		if (key_comp(*env_it, entry) == 0)
+			break ;
+		env_it++;
+	}
+	if (!*env_it)
+		return (NULL);
+	value = *env_it;
+	while (*value && *value != '=')
+		value++;
+	if (*value == '=')
+		value++;
+	return (value);
+}
 
 void	environ_remove(char *entry)
 {

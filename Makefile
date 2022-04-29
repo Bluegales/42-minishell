@@ -6,19 +6,20 @@
 #    By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/10 12:13:51 by pfuchs            #+#    #+#              #
-#    Updated: 2022/04/24 22:29:01 by pfuchs           ###   ########.fr        #
+#    Updated: 2022/04/29 08:46:17 by pfuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-VPATH = src
+VPATH = src src/environ src/helper src/parse
 
 # Compiler Variables
 CC		= gcc
 CFLAGSS	= -Wall -Wextra -g #-Werror -g
-INCFLAG	= -I include -I libft
+INCFLAG	= -I include -I include/parse -I libft
 # File Variables
 NAME	= minishell
-SRC_N	= main minishell environ environ_2 cmds cmd_export
+SRC_N	= main minishell environ environ_2 cmds cmd_export \
+			parse parse_vars parse_vars2
 SRC		= $(addsuffix .c,$(SRC_N))
 OBJ		= $(addprefix _bin/,$(notdir $(SRC:.c=.o)))
 
@@ -32,7 +33,7 @@ _bin :
 	mkdir _bin
 
 _bin/%.o : %.c | _bin
-	$(CC) -c $(CFLAGSS) -MMD -MP $(INCFLAG) $< -o $@
+	$(CC) -c $(CFLAGSS) -MMD -MP -g $(INCFLAG) $< -o $@
 
 clean:
 	@rm -fr _bin

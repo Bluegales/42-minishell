@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environ.h                                          :+:      :+:    :+:   */
+/*   parse_vars2.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/23 22:52:50 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/29 08:15:45 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/04/29 05:33:04 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/04/29 07:44:59 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIRON_H
-# define ENVIRON_H
+#ifndef PARSE_VARS2_H
+# define PARSE_VARS2_H
 
-extern char	**environ;
+// static functions that fonud no space in their .c files...
+int	cleanup(char **pieces, int error_return);
+int	count_vars(const char *str);
 
-int		environ_init(void);
-void	environ_cleanup(void);
-int		environ_add(char *new_entry);
-void	environ_remove(char *entry);
-char	*environ_get(char *entry);
-
-void	environ_print(void);
-
-#endif // ENVIRON_H
+#endif // PARSE_VARS2_H

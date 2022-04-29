@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environ.h                                          :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/23 22:52:50 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/29 08:15:45 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/04/24 22:36:04 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/04/29 08:24:11 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIRON_H
-# define ENVIRON_H
+#include "libft.h"
 
-extern char	**environ;
+#include "parse_vars.h"
 
-int		environ_init(void);
-void	environ_cleanup(void);
-int		environ_add(char *new_entry);
-void	environ_remove(char *entry);
-char	*environ_get(char *entry);
+#include <stdio.h>
 
-void	environ_print(void);
+int	parse(char **str)
+{
+	int		error;
 
-#endif // ENVIRON_H
+	error = parse_vars(str);
+	printf("%s", *str);
+	return (error);
+}

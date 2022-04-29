@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 21:07:16 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/24 22:32:39 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/29 10:33:52 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ t_cmd_function	get_function(char *command)
 			return (g_commands[i].function);
 		i++;
 	}
-	return NULL;
+	return (NULL);
 }

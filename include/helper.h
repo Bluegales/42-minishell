@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environ.h                                          :+:      :+:    :+:   */
+/*   helper.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/23 22:52:50 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/29 08:15:45 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/04/29 00:29:24 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/04/29 00:29:25 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIRON_H
-# define ENVIRON_H
+#ifndef HELPER_H
+# define HELPER_H
 
-extern char	**environ;
+char	**ft_strsplitholes(char const *s, char c);
 
-int		environ_init(void);
-void	environ_cleanup(void);
-int		environ_add(char *new_entry);
-void	environ_remove(char *entry);
-char	*environ_get(char *entry);
-
-void	environ_print(void);
-
-#endif // ENVIRON_H
+#endif // HELPER_H
