@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 22:37:19 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 01:54:09 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 17:07:01 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ static int	transform_vars(char **pieces)
 			value = environ_get(*piece_it + 1);
 			if (value && *value)
 			{
-				replacement = malloc(ft_strlen(value) + 3);
+				replacement = malloc(ft_strlen(value) + 1);
 				if (!replacement)
-					return (e_alloc_fail);
-				replacement[0] = '\'';
-				ft_memcpy(replacement + 1, value, ft_strlen(value));
-				ft_memcpy(replacement + ft_strlen(value) + 1, "\'\0", 2);
+					return (err_alloc_fail);
+				//replacement[0] = '\'';
+				ft_memcpy(replacement, value, ft_strlen(value) + 1);
+				//ft_memcpy(replacement + ft_strlen(value) + 1, "\'\0", 2);
 				free(*piece_it);
 				*piece_it = replacement;
 			}
@@ -105,7 +105,7 @@ static int	create_piece(const char **str, int offset, char ***pieces_it)
 		fprintf(stderr, "makign piece: <%.*s>\n", offset, *str); //
 		**pieces_it = ft_substr(*str, 0, offset);
 		if (!**pieces_it)
-			return (e_alloc_fail);
+			return (err_alloc_fail);
 		(*pieces_it)++;
 		*str += offset;
 		offset = 1;
@@ -117,11 +117,31 @@ static int	create_piece(const char **str, int offset, char ***pieces_it)
 		fprintf(stderr, "makign piece: <%.*s>\n", offset, *str); //
 		**pieces_it = ft_substr(*str, 0, offset);
 		if (!**pieces_it)
-			return (e_alloc_fail);
+			return (err_alloc_fail);
 		(*pieces_it)++;
 		*str += offset;
 	}
 	return (0);
+}
+
+static int	get_quote(char c, char quote)
+{
+	//printf("testing char %c on quote: %c\n", c, quote);
+	if (c == '\'' && quote != '\"')
+	{
+		if (quote == '\'')
+			return (0);
+		else
+			return ('\'');
+	}
+	if (c == '\"' && quote != '\'')
+	{
+		if (quote == '\"')
+			return (0);
+		else
+			return ('\"');
+	}
+	return (quote);
 }
 
 static int	create_pieces(const char *str, char ***pieces_it)
@@ -135,9 +155,8 @@ static int	create_pieces(const char *str, char ***pieces_it)
 	//fprintf(stderr, "creating pieces out of: <%s>\n", str);
 	while (*str_it)
 	{
-		if (*str_it == '\'')
-			quote ^= 1;
-		if (!quote && str_it[0] == '$')
+		quote = get_quote(*str_it, quote);
+		if (quote != '\'' && str_it[0] == '$')
 		{
 			error = create_piece(&str, str_it - str, pieces_it);
 			if (error)
@@ -158,10 +177,10 @@ int	parse_vars(char **str)
 	char	**pieces_it;
 	char	*merge;
 
-	fprintf(stderr, "making space for %d strings\n", count_vars(*str) * 2 + 2); //
+	//fprintf(stderr, "making space for %d strings\n", count_vars(*str) * 2 + 2); //
 	pieces = ft_calloc(count_vars(*str) * 2 + 2, sizeof(char *));
 	if (pieces == 0)
-		return (e_alloc_fail);
+		return (err_alloc_fail);
 	pieces_it = pieces;
 	error = create_pieces(*str, &pieces_it);
 	if (error)
@@ -171,7 +190,7 @@ int	parse_vars(char **str)
 		return (cleanup(pieces, error));
 	merge = merge_pieces(pieces);
 	if (!merge)
-		return (cleanup(pieces, e_alloc_fail));
+		return (cleanup(pieces, err_alloc_fail));
 	free(*str);
 	*str = merge;
 	//cleanup(pieces, 0);

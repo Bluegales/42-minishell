@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_split_words.h                                :+:      :+:    :+:   */
+/*   execute_single2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/30 03:03:48 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 10:07:41 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/04/30 18:04:06 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/04/30 18:04:07 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_SPLIT_WORDS_H
-# define PARSE_SPLIT_WORDS_H
+int	is_new_command(char *str)
+{
+	if (*str == '<')
+		return (1);
+	if (*str == '>')
+		return (1);
+	if (*str == '|')
+		return (1);
+	if (*str == '&')
+		return (1);
+	return (0);
+}
 
-char	**parse_split_words(char *str);
-
-#endif // PARSE_SPLIT_WORDS_H
+int	is_redirection(char *str)
+{
+	if (*str == '<')
+		return (1);
+	if (*str == '>')
+		return (1);
+	return (0);
+}

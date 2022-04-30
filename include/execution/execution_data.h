@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_split_words.h                                :+:      :+:    :+:   */
+/*   execution_data.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/30 03:03:48 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 10:07:41 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/04/30 16:24:08 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/04/30 17:56:24 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_SPLIT_WORDS_H
-# define PARSE_SPLIT_WORDS_H
+#ifndef EXECUTION_DATA_H
+# define EXECUTION_DATA_H
 
-char	**parse_split_words(char *str);
+typedef struct s_execution_data
+{
+	int		fd_in;
+	int		fd_out;
+	int		argc;
+	char	**argv;
+}	t_execution_data;
 
-#endif // PARSE_SPLIT_WORDS_H
+
+#endif // EXECUTION_DATA_H

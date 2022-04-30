@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   execute_single.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 03:49:08 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 17:36:02 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 19:34:18 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
+#include "execute_single.h"
 
+#include "execute_single2.h"
 #include "execution_data.h"
+#include "error.h"
 #include "redirect.h"
 #include "libft.h"
 
-int	exec_step(char *str, int *brackets)
+static void	init_redirection(t_execution_data *data, int fd_in, int fd_out)
 {
-	int	bracket_count;
+	int	error;
 
-	bracket_count = 0;
-	if (*str == '(')
-		bracket_count++;
-	if (*str == ')')
-		bracket_count--;
-}
-
-int	is_new_command(char *str)
-{
-	if (ft_strncmp(str, "|", 2) == 0)
-		return (1);
-	if (ft_strncmp(str, "&", 2) == 0)
-		return (1);
-	if (ft_strncmp(str, "||", 3) == 0)
-		return (1);
-	if (ft_strncmp(str, "&&", 3) == 0)
-		return (1);
-	return (0);
+	data->argc = 0;
+	data->argv = NULL;
+	fd_in = fd_in;
+	fd_out = fd_out;
 }
 
 int	handle_redirection(t_execution_data *data, char ***str)
@@ -55,19 +43,41 @@ int	handle_redirection(t_execution_data *data, char ***str)
 	return (0);
 }
 
-int	execute(char **words)
+static int	add_argv(t_execution_data *data, char *str)
+{
+	char	**new_argv;
+
+	new_argv = ft_calloc(data->argc + 1, sizeof(char **));
+	if (data->argv)
+		ft_memcpy(new_argv, data->argv, data->argc);
+	free(data->argv);
+	data->argv = new_argv;
+	data->argv[data->argc] = ft_strdup(str);
+	if (!data->argv[data->argc])
+	{
+		error(err_alloc_fail);
+		return (err_alloc_fail);
+	}
+	data->argv[data->argc + 1] = NULL;
+	return (0);
+}
+
+int	execute_single(char **words, int fd_in, int fd_out)
 {
 	int					error;
 	t_execution_data	data;
-	char				**it;
 
-	while (!is_new_command(words))
+	init_redirection(&data, fd_in, fd_out);
+	while (!is_new_command(*words))
 	{
-		error = handle_redirection(&data, words);
+		while (is_redirection(*words))
+		{
+			error = handle_redirection(&data, words);
+			if (error)
+				return (error);
+		}
+		error = add_argv(&data, *words);
 		if (error)
 			return (error);
 	}
-	int	bracket_returns[20];
-
-
 }

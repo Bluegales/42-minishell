@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 20:23:02 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 01:42:45 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 14:53:49 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static const char promt[] = { 0xE2, 0x9E, 0x9C, ' ', '\0'};
 int	minishell()
 {
 	char			*buf;
-	t_cmd_function	command_function;
+	char			**words;
+	//t_cmd_function	command_function;
 
 	if (environ_init())
 		return (1);
@@ -39,12 +40,13 @@ int	minishell()
 		if (ft_strncmp(buf, "exit", 4) == 0)
 		{
 			free(buf);
-			rl_clear_history();
+			//rl_clear_history();
 			environ_cleanup();
 			return (0);
 		}
-		parse(&buf);
-		free(buf);
+		words = parse(buf);
+
+		//free(buf);
 		//command_function = get_function(buf);
 		//printf("got %p", command_function);
 		// if (command_function)

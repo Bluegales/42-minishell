@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_split_words.h                                :+:      :+:    :+:   */
+/*   redirect.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/30 03:03:48 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 10:07:41 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/04/30 15:45:37 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/04/30 17:29:29 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_SPLIT_WORDS_H
-# define PARSE_SPLIT_WORDS_H
+#ifndef REDIRECT_H
+# define REDIRECT_H
 
-char	**parse_split_words(char *str);
+typedef struct s_execution_data	t_execution_data;
 
-#endif // PARSE_SPLIT_WORDS_H
+int	redirect(t_execution_data *data, char *str, char *next);
+
+#endif // REDIRECT_H

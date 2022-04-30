@@ -6,144 +6,66 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 02:57:32 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 07:48:24 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 14:38:43 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "environ.h"
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/10 12:22:40 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 02:59:36 by pfuchs           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "libft.h" //ft_strchr
+#include "parse_split_words.h"
 
 #include <stdlib.h> // malloc free
 
-static const char meta_seperators
+#include "parse_split_words2.h"
+#include "environ.h"
+#include "libft.h"
 
-static int	count_splits(const char *str, const char *delims)
+static char	**cleanup_splits(char **splits)
 {
-	int		splits;
-	char	last_seperator;
+	char	**it;
 
-	splits = 0;
-	last_seperator = 1;
-	while (*str)
+	it = splits;
+	while (*it)
 	{
-		if (last_seperator && !ft_strchr(delims, *str))
-		{
-			splits++;
-		}
-		if (ft_strchr(delims, *str))
-			last_seperator = 1;
-		else
-			last_seperator = 0;
-		str++;
+		free(*it);
+		it++;
 	}
-	return (splits);
+	free(splits);
+	return (NULL);
 }
 
-// Creates a split at the location of split
-// Returns the length of the split created
-// Returns -1 if allocation fails
-int	create_split(const char *str, const char *delims, char **split)
-{
-	int			length;
-	const char	*it1;
-	const char	*it2;
-
-	it1 = str;
-	length = -1;
-	while (*it1 && length == -1)
-	{
-		it2 = delims;
-		while (*it2 && length == -1)
-		{
-			if (*it1 == *it2)
-				length = (it1 - str);
-			it2++;
-		}
-		it1++;
-	}
-	if (length == -1)
-		length = (it1 - str);
-	*split = (char *)malloc(length + 1);
-	if (!*split)
-		return (-1);
-	ft_strlcpy(*split, str, length + 1);
-	return (length);
-}
-
-// Loops through the string and creates all the splits
-// On error it frees the created strings and returns 1
-static int	fill_splits(const char *str, const char *delims, char **splits)
-{
-	char	last_seperator;
-	int		split_length;
-
-	last_seperator = 1;
-	while (*str)
-	{
-		if (last_seperator && !ft_strchr(delims, *str))
-		{
-			split_length = create_split(str, delims, splits);
-			if (split_length == -1)
-				return (1);
-			str += split_length - 1;
-			splits++;
-		}
-		if (ft_strchr(delims, *str))
-			last_seperator = 1;
-		else
-			last_seperator = 0;
-		str++;
-	}
-	return (0);
-}
-
-// Returns a freeable NULL terminated array of freeable strings obtained by
-// spliting "str" with "delims".
-char	**ft_strsplitstr(const char *str, const char *delims)
+static char	**split_words(const char *str, const char *delims)
 {
 	char	**splits;
 	char	**it;
 	int		count;
 
+	while (*str && ft_strchr(delims, *str))
+		str++;
 	count = count_splits(str, delims);
-	splits = (char **)malloc(sizeof(char *) * (count + 1));
+	splits = ft_calloc(count + 1, sizeof(char *));
 	if (!splits)
 		return (NULL);
-	splits[count] = NULL;
-	if (fill_splits(str, delims, splits))
+	it = splits;
+	while (*str)
 	{
-		it = splits;
-		while (*it)
-		{
-			free(*it);
-			it++;
-		}
-		free(splits);
-		splits = NULL;
+		//printf("next location: <%s>\n", str);
+		*it = ft_substr(str, 0, split_length(str, delims));
+		if (!*it)
+			return (cleanup_splits(it));
+		str += split_length(str, delims);
+		//printf("string: <%s>\n", *it);
+		str = next_split_location(str, delims);
+		it++;
 	}
 	return (splits);
 }
 
-char	**split_words(char *str)
+char	**parse_split_words(char *str)
 {
 	char	*delim;
 
 	delim = environ_get("IFS");
 	if (!delim)
-		return (ft_strsplitstr(str, " \t\n"));
+		return (split_words(str, " \t\n"));
 	else
-		return (ft_strsplitstr(str, delim));
+		return (split_words(str, delim));
 }

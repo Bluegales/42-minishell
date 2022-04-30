@@ -6,31 +6,51 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 22:36:04 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 07:48:26 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 15:10:16 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-#include <stdio.h>
-
 #include "parse_vars.h"
 #include "parse_remove_quotes.h"
 #include "parse_split_words.h"
-#include "error.h"
-#include "libft.h"
 
-int	parse(char **str, char ***words)
+
+#include <stdio.h> // just for debugging
+static void	debug(char	**words)
 {
-	int		error;
+	while (*words)
+	{
+		fprintf(stderr, "-%s-\n", *words);
+		words++;
+	}
+}
 
-	error = parse_vars(str);
-	if (error)
-		return (error);
-	parse_remove_quotes(*str);
-	*words = parse_split_words(str);
+char	**parse(char *str)
+{
+	char	**words;
+	char	**it;
+
+	// if (parse_vars(&str))
+	// 	return (NULL);
+	//parse_remove_quotes(str);
+	//fprintf(stderr, "got: %s\n", str);
+	words = parse_split_words(str);
 	if (!*words)
-		return (e_alloc_fail);
-	printf("%s", *str);
-	return (error);
+	{
+		fprintf(stderr, "no words\n");
+		return (NULL);
+	}
+	it = words;
+	while (*it)
+	{
+		if (parse_vars(it))
+			return (NULL);
+		parse_remove_quotes(*it);
+		it++;
+	}
+
+	debug(words);
+	return (words);
 }
