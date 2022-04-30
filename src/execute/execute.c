@@ -6,13 +6,13 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 03:49:08 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 17:36:02 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 21:38:04 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
-#include "execution_data.h"
+#include "execute_data.h"
 #include "redirect.h"
 #include "libft.h"
 
@@ -40,7 +40,7 @@ int	is_new_command(char *str)
 	return (0);
 }
 
-int	handle_redirection(t_execution_data *data, char ***str)
+int	handle_redirection(t_execute_data *data, char ***str)
 {
 	int	error;
 
@@ -57,9 +57,9 @@ int	handle_redirection(t_execution_data *data, char ***str)
 
 int	execute(char **words)
 {
-	int					error;
-	t_execution_data	data;
-	char				**it;
+	int				error;
+	t_execute_data	data;
+	char			**it;
 
 	while (!is_new_command(words))
 	{
@@ -68,6 +68,4 @@ int	execute(char **words)
 			return (error);
 	}
 	int	bracket_returns[20];
-
-
 }

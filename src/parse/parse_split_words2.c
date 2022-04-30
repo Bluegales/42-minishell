@@ -6,14 +6,14 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 10:00:39 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 14:38:52 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 20:17:54 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static const char	g_meta_seperators[] = "|&()";
-static const char	g_meta_double_seperators[] = "|&";
+static const char	g_meta_seperators[] = "|&<>()";
+static const char	g_meta_double_seperators[] = "|&<>";
 
 const char	*next_split_location(const char *str, const char *delims)
 {

@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 15:44:56 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 17:32:53 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 20:22:09 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 #include <fcntl.h> // open flags
 #include <stdio.h> // perror
 
-#include "execution_data.h"
+#include "execute_data.h"
 #include "error.h"
+#include "libft.h"
 
-int	redirect_input_file(t_execution_data *data, char *file)
+int	redirect_input_file(t_execute_data *data, char *file)
 {
 	data->fd_in = open(file, O_RDONLY | O_CLOEXEC);
 	if (data->fd_in == -1)
@@ -30,12 +31,14 @@ int	redirect_input_file(t_execution_data *data, char *file)
 	return (0);
 }
 
-int	redirect_input_console(t_execution_data *data, char *delim)
+int	redirect_input_console(t_execute_data *data, char *delim)
 {
-
+	(void) data;
+	(void) delim;
+	return (0);
 }
 
-int	redirect_output_file(t_execution_data *data, char *file)
+int	redirect_output_file(t_execute_data *data, char *file)
 {
 	data->fd_out = open(file, O_WRONLY | O_CREAT);
 	if (data->fd_out == -1)
@@ -46,7 +49,7 @@ int	redirect_output_file(t_execution_data *data, char *file)
 	return (0);
 }
 
-int	redirect_output_append(t_execution_data *data, char *file)
+int	redirect_output_append(t_execute_data *data, char *file)
 {
 	data->fd_out = open(file, O_WRONLY | O_CREAT | O_APPEND);
 	if (data->fd_out == -1)
@@ -57,7 +60,7 @@ int	redirect_output_append(t_execution_data *data, char *file)
 	return (0);
 }
 
-int	redirect(t_execution_data *data, char *str, char *next)
+int	redirect(t_execute_data *data, char *str, char *next)
 {
 	if (next == NULL)
 	{
