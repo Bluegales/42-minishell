@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 22:52:53 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/29 10:32:43 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 01:23:38 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,20 @@ int	environ_add(char *new_entry)
 
 	old = NULL;
 	size = 0;
-	while (environ[size] != NULL)
+	while (g_environ[size] != NULL)
 	{
-		if (key_comp(environ[size], new_entry) == 0)
-			old = environ + size;
+		if (key_comp(g_environ[size], new_entry) == 0)
+			old = g_environ + size;
 		size++;
 	}
 	if (!old)
 	{
-		new_env = malloc(sizeof(char **) * (size + 20));
+		new_env = malloc(sizeof(char **) * (size + 2));
 		if (!new_env)
 			return (1);
-		ft_memcpy(new_env, environ, size * sizeof(char *));
-		free(environ);
-		environ = new_env;
+		ft_memcpy(new_env, g_environ, size * sizeof(char *));
+		free(g_environ);
+		g_environ = new_env;
 		old = new_env + size;
 		*old = NULL;
 		*(old + 1) = NULL;
@@ -84,7 +84,7 @@ char	*environ_get(char *entry)
 	char	**env_it;
 	char	*value;
 
-	env_it = environ;
+	env_it = g_environ;
 	while (*env_it)
 	{
 		if (key_comp(*env_it, entry) == 0)
@@ -103,19 +103,19 @@ char	*environ_get(char *entry)
 
 void	environ_remove(char *entry)
 {
-	while (*environ)
+	while (*g_environ)
 	{
-		if (key_comp(*environ, entry))
+		if (key_comp(*g_environ, entry))
 			break ;
-		environ++;
+		g_environ++;
 	}
-	if (!*environ)
+	if (!*g_environ)
 		return ;
-	free(environ);
-	free(environ + 1);
-	while (*(environ + 1))
+	free(g_environ);
+	free(g_environ + 1);
+	while (*g_environ)
 	{
-		*environ = *(environ + 1);
-		environ++;
+		*g_environ = *(g_environ + 1);
+		g_environ++;
 	}
 }

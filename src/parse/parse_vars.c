@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 22:37:19 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/29 10:47:12 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 01:54:09 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,18 @@ static char	*merge_pieces(char **pieces)
 	str = malloc(length + 1);
 	if (!str)
 		return (NULL);
+	str[length] = '\0';
 	i = 0;
 	str_it = str;
 	while (pieces[i])
 	{
 		length = ft_strlen(pieces[i]);
 		ft_memcpy(str_it, pieces[i], length);
+		free(pieces[i]);
 		str_it += length;
 		i++;
 	}
+	free(pieces);
 	return (str);
 }
 
@@ -86,6 +89,7 @@ static int	transform_vars(char **pieces)
 				replacement[0] = '\'';
 				ft_memcpy(replacement + 1, value, ft_strlen(value));
 				ft_memcpy(replacement + ft_strlen(value) + 1, "\'\0", 2);
+				free(*piece_it);
 				*piece_it = replacement;
 			}
 		}
@@ -128,11 +132,11 @@ static int	create_pieces(const char *str, char ***pieces_it)
 
 	quote = 0;
 	str_it = str;
-	fprintf(stderr, "creating pieces out of: <%s>\n", str);
+	//fprintf(stderr, "creating pieces out of: <%s>\n", str);
 	while (*str_it)
 	{
-		if (*str_it == quote)
-			quote = ~quote & 1;
+		if (*str_it == '\'')
+			quote ^= 1;
 		if (!quote && str_it[0] == '$')
 		{
 			error = create_piece(&str, str_it - str, pieces_it);
@@ -162,17 +166,14 @@ int	parse_vars(char **str)
 	error = create_pieces(*str, &pieces_it);
 	if (error)
 		return (cleanup(pieces, error));
-	fprintf(stderr, "transforming pieces\n"); //
 	error = transform_vars(pieces);
 	if (error)
 		return (cleanup(pieces, error));
-	fprintf(stderr, "merging pieces:\n"); //
 	merge = merge_pieces(pieces);
 	if (!merge)
 		return (cleanup(pieces, e_alloc_fail));
-	fprintf(stderr, "freeing:\n"); //
 	free(*str);
 	*str = merge;
-	cleanup(pieces, 0);
+	//cleanup(pieces, 0);
 	return (0);
 }

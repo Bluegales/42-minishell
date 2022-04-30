@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environ.h                                          :+:      :+:    :+:   */
+/*   parse_remove_quotes.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/23 22:52:50 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 01:43:00 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/04/30 02:26:41 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/04/30 02:54:11 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIRON_H
-# define ENVIRON_H
+void	parse_remove_quotes(char *str)
+{
+	int		quote;
+	char	*str_replace;
 
-extern char	**g_environ;
-
-int		environ_init(void);
-void	environ_cleanup(void);
-int		environ_add(char *new_entry);
-void	environ_remove(char *entry);
-char	*environ_get(char *entry);
-
-void	environ_print(void);
-
-#endif // ENVIRON_H
+	quote = 0;
+	str_replace = str;
+	while (*str)
+	{
+		*str_replace = *str;
+		if (*str == '\'')
+			quote = 1 - quote;
+		else if (quote || *str != '"')
+			str_replace++;
+		str++;
+	}
+	*str_replace = '\0';
+}

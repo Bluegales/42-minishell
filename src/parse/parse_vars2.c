@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 03:58:44 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/29 08:24:26 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/04/29 23:39:49 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,15 @@
 
 int	cleanup(char **pieces, int error_return)
 {
-	(void) pieces;
+	char **piece_it;
+
+	piece_it = pieces;
+	while (*piece_it)
+	{
+		free(*piece_it);
+		piece_it++;
+	}
+	free(pieces);
 	return (error_return);
 }
 

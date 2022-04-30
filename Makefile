@@ -6,7 +6,7 @@
 #    By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/10 12:13:51 by pfuchs            #+#    #+#              #
-#    Updated: 2022/04/29 08:46:17 by pfuchs           ###   ########.fr        #
+#    Updated: 2022/04/30 02:39:04 by pfuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ INCFLAG	= -I include -I include/parse -I libft
 # File Variables
 NAME	= minishell
 SRC_N	= main minishell environ environ_2 cmds cmd_export \
-			parse parse_vars parse_vars2
+			parse parse_vars parse_vars2 parse_remove_quotes
 SRC		= $(addsuffix .c,$(SRC_N))
 OBJ		= $(addprefix _bin/,$(notdir $(SRC:.c=.o)))
 

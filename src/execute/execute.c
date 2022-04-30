@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environ.h                                          :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/23 22:52:50 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 01:43:00 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/04/30 03:49:08 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/04/30 03:52:35 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIRON_H
-# define ENVIRON_H
+int	exec_step(char *str, int *brackets)
+{
+	int	bracket_count;
 
-extern char	**g_environ;
+	bracket_count = 0;
+	if (*str == '(')
+		bracket_count++;
+	if (*str == ')')
+		bracket_count--;
 
-int		environ_init(void);
-void	environ_cleanup(void);
-int		environ_add(char *new_entry);
-void	environ_remove(char *entry);
-char	*environ_get(char *entry);
 
-void	environ_print(void);
+}
 
-#endif // ENVIRON_H
+
+int	execute(char *str)
+{
+	int	brackets[20];
+
+
+}
