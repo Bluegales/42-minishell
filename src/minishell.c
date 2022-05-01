@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 20:23:02 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 21:49:14 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/01 08:02:30 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "parse.h"
 #include "libft.h"
 #include "cmds.h"
-#include "execute_data.h"
+#include "execute.h"
 
 extern char **environ;
 
@@ -46,9 +46,9 @@ int	minishell()
 			return (0);
 		}
 		words = parse(buf);
-		execute_data_create(words, 0, 3);
+		execute(words);
 
-		//free(buf);
+		free(buf);
 		//command_function = get_function(buf);
 		//printf("got %p", command_function);
 		// if (command_function)

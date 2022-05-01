@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmds.h                                             :+:      :+:    :+:   */
+/*   execute_pipe2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/24 20:46:30 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 07:57:21 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/05/01 08:59:10 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/01 09:06:23 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CMDS_H
-# define CMDS_H
+#include "execute_pipe2.h"
 
-# include "cmd_export.h"
+#include "words_util.h"
+#include "libft.h"
 
-typedef int	(*t_cmd_function)(char *, int, int);
+int	count_argv(char **words)
+{
+	int count;
 
-t_cmd_function	get_function(char *command);
-
-#endif // CMDS_H
+	count = 0;
+	while (**words && !is_logic_connector(**words))
+	{
+		while (**words == '<' || **words == '>')
+			words += 2;
+		if (*words)
+		{
+			count += ft_strlen(*words) + 1;
+			words++;
+		}
+	}
+	return (count);
+}

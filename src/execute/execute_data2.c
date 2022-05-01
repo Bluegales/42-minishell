@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 18:04:06 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 21:49:44 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/01 07:58:09 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,33 @@ int	is_redirection(char *str)
 	return (0);
 }
 
-void	cleanup_execute_data(t_execute_data *data)
+int	execute_data_count(char **words)
+{
+	int	count = 0;
+
+	while (*words)
+	{
+		if (is_new_command(*words))
+			count++;
+		words++;
+	}
+	return (count);
+}
+
+void	execute_data_cleanup(t_execute_data *data)
 {
 	(void) data;
 }
 
-void	init_execute_data(t_execute_data *data, int fd_in, int fd_out)
+void	execute_data_init(t_execute_data *data, int fd_in, int fd_out)
 {
 	data->argc = 0;
 	data->argv = NULL;
 	data->fd_in = fd_in;
 	data->fd_out = fd_out;
 }
+
+
 
 #include <stdio.h>
 

@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmds.h                                             :+:      :+:    :+:   */
+/*   execute_pipe2.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/24 20:46:30 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 07:57:21 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/05/01 09:00:15 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/01 09:01:02 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CMDS_H
-# define CMDS_H
+#ifndef EXECUTE_PIPE2_H
+#define EXECUTE_PIPE2_H
 
-# include "cmd_export.h"
+int	combined_argv_length(char **words);
 
-typedef int	(*t_cmd_function)(char *, int, int);
-
-t_cmd_function	get_function(char *command);
-
-#endif // CMDS_H
+#endif // EXECUTE_PIPE2_H

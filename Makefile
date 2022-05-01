@@ -6,7 +6,7 @@
 #    By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/10 12:13:51 by pfuchs            #+#    #+#              #
-#    Updated: 2022/04/30 20:28:56 by pfuchs           ###   ########.fr        #
+#    Updated: 2022/05/01 07:55:03 by pfuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC_N	= main minishell environ environ_2 cmds cmd_export \
 			error\
 			parse parse_vars parse_vars2 parse_remove_quotes \
 			parse_split_words parse_split_words2\
-			execute_data execute_data2 redirect
+			execute execute_pipe execute_data execute_data2 redirect\
+			words_util
 SRC		= $(addsuffix .c,$(SRC_N))
 OBJ		= $(addprefix _bin/,$(notdir $(SRC:.c=.o)))
 

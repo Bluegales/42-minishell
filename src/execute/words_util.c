@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmds.h                                             :+:      :+:    :+:   */
+/*   words_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/24 20:46:30 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 07:57:21 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/05/01 05:44:22 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/01 08:13:40 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CMDS_H
-# define CMDS_H
+#include "words_util.h"
 
-# include "cmd_export.h"
+#include "libft.h"
 
-typedef int	(*t_cmd_function)(char *, int, int);
+int	is_logic_connector(char *str)
+{
+	if (ft_strncmp("||", str, 3) == 0)
+		return (1);
+	if (ft_strncmp("&&", str, 3) == 0)
+		return (1);
+	return (0);
+}
 
-t_cmd_function	get_function(char *command);
-
-#endif // CMDS_H
+int	is_command(char *str)
+{
+	if (ft_strncmp("||", str, 3) == 0)
+		return (0);
+	if (ft_strncmp("&&", str, 3) == 0)
+		return (0);
+	if (*str == ')')
+		return (0);
+	return (1);
+}

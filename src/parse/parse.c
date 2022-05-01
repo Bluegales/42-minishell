@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 22:36:04 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 15:10:16 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/01 08:09:33 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**parse(char *str)
 	{
 		if (parse_vars(it))
 			return (NULL);
-		parse_remove_quotes(*it);
+		//parse_remove_quotes(*it);
 		it++;
 	}
 

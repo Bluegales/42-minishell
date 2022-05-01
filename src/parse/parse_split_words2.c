@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 10:00:39 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 20:17:54 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/01 00:08:29 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ static int	get_quote(char c, char quote)
 
 int	split_length2(const char *str, const char *delims, int i)
 {
-	int		delim_start;
 	char	*is_meta;
 	char	*is_delim;
 
-	delim_start = 0;
 	is_meta = ft_strchr(g_meta_seperators, str[i]);
 	is_delim = ft_strchr(delims, str[i]);
 	if (is_delim)

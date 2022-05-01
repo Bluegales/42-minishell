@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 16:24:08 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 20:11:40 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/01 09:13:05 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ typedef struct s_execute_data
 	char	**argv;
 }	t_execute_data;
 
-int	execute_data_create(char **words, int fd_in, int fd_out);
+int	execute_data_create(t_execute_data *data ,char **words);
 
 #endif // EXECUTE_DATA_H

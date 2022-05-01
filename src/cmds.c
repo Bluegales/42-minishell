@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 21:07:16 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/29 10:33:52 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/01 07:58:25 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_command_function_pair
 	t_cmd_function	function;
 }					t_command_function_pair;
 
-const static t_command_function_pair	g_commands[] = {
+static const t_command_function_pair	g_commands[] = {
 {"asd", cmd_export},
 {"asd2", cmd_export}
 };

@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 03:49:08 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 22:02:56 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/01 09:12:35 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h> // free
 
 #include "execute_data2.h"
-#include "execute_data.h"
+#include "words_util.h"
 #include "error.h"
 #include "redirect.h"
 #include "libft.h"
@@ -39,7 +39,12 @@ static int	add_argv(t_execute_data *data, char *str)
 {
 	char	**new_argv;
 
-	new_argv = ft_calloc(data->argc + 1, sizeof(char **));
+	new_argv = ft_calloc(data->argc + 2, sizeof(char **));
+	if (!new_argv)
+	{
+		error(err_alloc_fail);
+		return (err_alloc_fail);
+	}
 	if (data->argv)
 		ft_memcpy(new_argv, data->argv, data->argc * sizeof(char *));
 	free(data->argv);
@@ -55,27 +60,26 @@ static int	add_argv(t_execute_data *data, char *str)
 	return (0);
 }
 
-int	execute_data_create(char **words, int fd_in, int fd_out)
+int	execute_data_create(t_execute_data *data ,char **words)
 {
 	int				error;
-	t_execute_data	data;
 
-	init_execute_data(&data, fd_in, fd_out);
-	while (*words && !is_new_command(*words))
+	execute_data_init(&data, 0, 1);
+	while (*words && !is_logic_connector(*words))
 	{
 		while (is_redirection(*words))
 		{
 			error = handle_redirection(&data, &words);
 			if (error)
 			{
-				cleanup_execute_data(&data);
+				execute_data_cleanup(&data);
 				return (error);
 			}
 		}
 		error = add_argv(&data, *words);
 		if (error)
 		{
-			cleanup_execute_data(&data);
+			execute_data_cleanup(&data);
 			return (error);
 		}
 		words++;

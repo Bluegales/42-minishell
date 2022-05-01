@@ -6,11 +6,13 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 00:17:20 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 21:37:52 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/01 07:57:35 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
+
+#include <stdio.h>
 
 #include "libft.h"
 

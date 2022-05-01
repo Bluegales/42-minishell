@@ -6,66 +6,82 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 03:49:08 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 21:38:04 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/01 08:36:14 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
-#include "execute_data.h"
+#include <unistd.h>
+
+#include "execute_pipe.h"
 #include "redirect.h"
+#include "words_util.h"
 #include "libft.h"
 
-int	exec_step(char *str, int *brackets)
+static void	skip(char ***words)
 {
 	int	bracket_count;
 
-	bracket_count = 0;
-	if (*str == '(')
-		bracket_count++;
-	if (*str == ')')
-		bracket_count--;
+	if (***words != '(')
+	{
+		while (**words && !is_logic_connector(**words))
+			*words += 1;
+		return ;
+	}
+	*words += 1;
+	bracket_count = 1;
+	while (**words && bracket_count)
+	{
+		if (***words == '(')
+			bracket_count++;
+		if (***words == ')')
+			bracket_count--;
+		*words += 1;
+	}
 }
 
-int	is_new_command(char *str)
+static void	handle_connector(char ***words, int last_return)
 {
-	if (ft_strncmp(str, "|", 2) == 0)
-		return (1);
-	if (ft_strncmp(str, "&", 2) == 0)
-		return (1);
-	if (ft_strncmp(str, "||", 3) == 0)
-		return (1);
-	if (ft_strncmp(str, "&&", 3) == 0)
-		return (1);
-	return (0);
-}
-
-int	handle_redirection(t_execute_data *data, char ***str)
-{
-	int	error;
-
-	if (ft_strncmp(str, "<", 1) != 0 && ft_strncmp(str, ">", 1) != 0)
-		return (0);
-	error = redirect(data, str, str + 1);
-	if (error)
-		return (1);
-	if (ft_strncmp(str, "<<", 3) == 0 || ft_strncmp(str, ">>", 3) == 0)
-		*str += 1;
-	*str += 1;
-	return (0);
+	while (**words)
+	{
+		printf("it...\n");
+		if (ft_strncmp("||", **words, 3) == 0)
+		{
+			*words += 1;
+			if (!last_return)
+				return ;
+			skip(words);
+		}
+		else if (ft_strncmp("&&", **words, 3) == 0)
+		{
+			*words += 1;
+			if (last_return)
+				return ;
+			skip(words);
+		}
+	}
 }
 
 int	execute(char **words)
 {
-	int				error;
-	t_execute_data	data;
-	char			**it;
+	int		error;
+	int		last_return;
 
-	while (!is_new_command(words))
+	last_return = 0;
+	while (*words)
 	{
-		error = handle_redirection(&data, words);
-		if (error)
-			return (error);
+		while (*words && **words == '(')
+			words++;
+		if (*words)
+		{
+			error = execute_pipe(&words, &last_return);
+			if (error)
+				return (error);
+		}
+		while (*words && **words == ')')
+			words++;
+		handle_connector(&words, last_return);
 	}
-	int	bracket_returns[20];
+	return (0);
 }
