@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_pipe2.c                                    :+:      :+:    :+:   */
+/*   execute_data.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/01 08:59:10 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 19:09:14 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/04/30 16:24:08 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/01 18:51:49 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute_pipe2.h"
+#ifndef EXECUTE_DATA_H
+# define EXECUTE_DATA_H
 
-#include <limits.h>
-
-#include "execute_data.h"
-#include "words_util.h"
-
-#include "libft.h"
-
-int	count_pipes(char **words)
+typedef struct s_execute_data
 {
-	int	count;
+	int		fd_in;
+	char	*file_in;
+	int		file_in_flags;
 
-	count = 0;
-	while (*words && !is_logic_connector(*words))
-	{
-		if (ft_strncmp(*words, "|", 2) == 0)
-			count++;
-		words++;
-	}
-	return (count);
-}
+	int		fd_out;
+	char	*file_out;
+	int		file_out_flags;
+
+	int		argc;
+	char	**argv;
+	char	*executable;
+
+	char	**paths;
+}	t_execute_data;
+
+int	execute_data_create(t_execute_data *data, char ***words);
+#endif // EXECUTE_DATA_H

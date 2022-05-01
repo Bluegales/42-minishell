@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_pipe2.c                                    :+:      :+:    :+:   */
+/*   execute_pipe2.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/01 08:59:10 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 19:09:14 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/05/01 09:00:15 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/01 13:44:00 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute_pipe2.h"
+#ifndef EXECUTE_PIPE2_H
+# define EXECUTE_PIPE2_H
 
-#include <limits.h>
+int	combined_argv_length(char **words);
+int	count_pipes(char **words);
 
-#include "execute_data.h"
-#include "words_util.h"
-
-#include "libft.h"
-
-int	count_pipes(char **words)
-{
-	int	count;
-
-	count = 0;
-	while (*words && !is_logic_connector(*words))
-	{
-		if (ft_strncmp(*words, "|", 2) == 0)
-			count++;
-		words++;
-	}
-	return (count);
-}
+#endif // EXECUTE_PIPE2_H

@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_data.h                                     :+:      :+:    :+:   */
+/*   is_builtin.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/30 16:24:08 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 09:13:05 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/05/01 19:02:44 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/01 19:02:52 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTE_DATA_H
-# define EXECUTE_DATA_H
+#ifndef IS_BUILTIN_H
+# define IS_BUILTIN_H
 
-typedef struct s_execute_data
-{
-	int		fd_in;
-	int		fd_out;
-	int		argc;
-	char	**argv;
-}	t_execute_data;
+int	is_builtin(char *str);
 
-int	execute_data_create(t_execute_data *data ,char **words);
-
-#endif // EXECUTE_DATA_H
+#endif // IS_BUILTIN_H

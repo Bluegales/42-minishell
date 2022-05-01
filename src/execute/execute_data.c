@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 03:49:08 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 09:12:35 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/01 18:53:23 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "error.h"
 #include "redirect.h"
 #include "libft.h"
+#include "environ.h"
 
 static int	handle_redirection(t_execute_data *data, char ***str)
 {
@@ -60,30 +61,30 @@ static int	add_argv(t_execute_data *data, char *str)
 	return (0);
 }
 
-int	execute_data_create(t_execute_data *data ,char **words)
+int	execute_data_create(t_execute_data *data, char ***words)
 {
-	int				error;
+	int		error;
 
-	execute_data_init(&data, 0, 1);
-	while (*words && !is_logic_connector(*words))
+	execute_data_init(data, 0, 1);
+	while (**words && !is_command_connector(**words))
 	{
-		while (is_redirection(*words))
+		while (is_redirection(**words))
 		{
-			error = handle_redirection(&data, &words);
+			error = handle_redirection(data, words);
 			if (error)
 			{
-				execute_data_cleanup(&data);
+				execute_data_cleanup(data);
 				return (error);
 			}
 		}
-		error = add_argv(&data, *words);
+		error = add_argv(data, **words);
 		if (error)
 		{
-			execute_data_cleanup(&data);
+			execute_data_cleanup(data);
 			return (error);
 		}
-		words++;
+		*words += 1;
 	}
-	debug_execution_data(&data);
+	debug_execution_data(data);
 	return (0);
 }

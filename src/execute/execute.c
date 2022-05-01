@@ -6,13 +6,14 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 03:49:08 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 08:36:14 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/01 18:45:53 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
 #include <unistd.h>
+#include <stdio.h>
 
 #include "execute_pipe.h"
 #include "redirect.h"
@@ -45,7 +46,6 @@ static void	handle_connector(char ***words, int last_return)
 {
 	while (**words)
 	{
-		printf("it...\n");
 		if (ft_strncmp("||", **words, 3) == 0)
 		{
 			*words += 1;

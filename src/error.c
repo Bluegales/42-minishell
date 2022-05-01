@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 00:17:20 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 07:57:35 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/01 14:02:31 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ static const char	*g_error_msg[] = {
 	"error: parsing failed",
 };
 
-void	error(enum e_error error)
+int	error(enum e_error error)
 {
 	printf("%s\n", g_error_msg[error]);
+	return (error);
 	//exit(error);
 }

@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   words_util.h                                       :+:      :+:    :+:   */
+/*   set_path.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/01 06:59:45 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 08:10:47 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/05/01 19:09:38 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/01 19:09:47 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORDS_UTIL_H
-# define WORDS_UTIL_H
+#ifndef SET_PATH_H
+# define SET_PATH_H
 
-int	is_logic_connector(char *str);
-int	is_command(char *str);
+int	set_command_path(t_execute_data *data);
 
-#endif // WORDS_UTIL_H
+#endif // SET_PATH_H
