@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 22:36:04 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 08:09:33 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/02 06:36:11 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ char	**parse(char *str)
 	//parse_remove_quotes(str);
 	//fprintf(stderr, "got: %s\n", str);
 	words = parse_split_words(str);
-	if (!*words)
-	{
-		fprintf(stderr, "no words\n");
-		return (NULL);
-	}
 	it = words;
 	while (*it)
 	{

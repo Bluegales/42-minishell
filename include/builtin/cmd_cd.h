@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_unset.c                                        :+:      :+:    :+:   */
+/*   cmd_cd.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/24 22:34:09 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/24 23:50:49 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/05/02 07:16:36 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/02 07:16:37 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd_unset.h"
+#ifndef CMD_CD_H
+#define CMD_CD_H
 
-int	cmd_export(char *str, int in_fd, int out_fd)
-{
-	environ_remove(str);
-}
+int	cmd_cd(int argc, char **argv);
+
+#endif // CMD_CD_H

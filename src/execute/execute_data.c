@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 03:49:08 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 18:53:23 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/02 07:34:42 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "redirect.h"
 #include "libft.h"
 #include "environ.h"
+#include "builtin.h"
 
 static int	handle_redirection(t_execute_data *data, char ***str)
 {
@@ -30,9 +31,9 @@ static int	handle_redirection(t_execute_data *data, char ***str)
 	error = redirect(data, **str, **str + 1);
 	if (error)
 		return (1);
-	if (ft_strncmp(**str, "<<", 3) == 0 || ft_strncmp(**str, ">>", 3) == 0)
-		*str += 1;
-	*str += 1;
+	//if (ft_strncmp(**str, "<<", 3) == 0 || ft_strncmp(**str, ">>", 3) == 0)
+	//	*str += 1;
+	*str += 2;
 	return (0);
 }
 
@@ -43,7 +44,7 @@ static int	add_argv(t_execute_data *data, char *str)
 	new_argv = ft_calloc(data->argc + 2, sizeof(char **));
 	if (!new_argv)
 	{
-		error(err_alloc_fail);
+		error_msg(err_alloc_fail);
 		return (err_alloc_fail);
 	}
 	if (data->argv)
@@ -53,7 +54,7 @@ static int	add_argv(t_execute_data *data, char *str)
 	data->argv[data->argc] = ft_strdup(str);
 	if (!data->argv[data->argc])
 	{
-		error(err_alloc_fail);
+		error_msg(err_alloc_fail);
 		return (err_alloc_fail);
 	}
 	data->argv[data->argc + 1] = NULL;
@@ -66,9 +67,9 @@ int	execute_data_create(t_execute_data *data, char ***words)
 	int		error;
 
 	execute_data_init(data, 0, 1);
-	while (**words && !is_command_connector(**words))
+	while (**words && is_command(**words))
 	{
-		while (is_redirection(**words))
+		while (**words && is_redirection(**words))
 		{
 			error = handle_redirection(data, words);
 			if (error)
@@ -77,6 +78,8 @@ int	execute_data_create(t_execute_data *data, char ***words)
 				return (error);
 			}
 		}
+		if (!**words)
+			break;
 		error = add_argv(data, **words);
 		if (error)
 		{
@@ -85,6 +88,7 @@ int	execute_data_create(t_execute_data *data, char ***words)
 		}
 		*words += 1;
 	}
+	data->builtin = get_builtin(data->argv[0]);
 	debug_execution_data(data);
 	return (0);
 }

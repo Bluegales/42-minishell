@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 22:37:19 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 17:07:01 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/02 04:19:44 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,9 @@ static char	*merge_pieces(char **pieces)
 	{
 		length = ft_strlen(pieces[i]);
 		ft_memcpy(str_it, pieces[i], length);
-		free(pieces[i]);
 		str_it += length;
 		i++;
 	}
-	free(pieces);
 	return (str);
 }
 
@@ -102,7 +100,7 @@ static int	create_piece(const char **str, int offset, char ***pieces_it)
 {
 	if (offset)
 	{
-		fprintf(stderr, "makign piece: <%.*s>\n", offset, *str); //
+		//fprintf(stderr, "makign piece: <%.*s>\n", offset, *str); //
 		**pieces_it = ft_substr(*str, 0, offset);
 		if (!**pieces_it)
 			return (err_alloc_fail);
@@ -114,7 +112,7 @@ static int	create_piece(const char **str, int offset, char ***pieces_it)
 		while (ft_isalpha((*str)[offset])
 				|| (offset == 1 && (*str)[offset] == '?'))
 			offset++;
-		fprintf(stderr, "makign piece: <%.*s>\n", offset, *str); //
+		//fprintf(stderr, "makign piece: <%.*s>\n", offset, *str); //
 		**pieces_it = ft_substr(*str, 0, offset);
 		if (!**pieces_it)
 			return (err_alloc_fail);
@@ -124,6 +122,9 @@ static int	create_piece(const char **str, int offset, char ***pieces_it)
 	return (0);
 }
 
+// returns the new value of quote depending on the current quote
+// for example if the text is currently double quoted a single quote doesnt
+// do anything
 static int	get_quote(char c, char quote)
 {
 	//printf("testing char %c on quote: %c\n", c, quote);
@@ -177,22 +178,20 @@ int	parse_vars(char **str)
 	char	**pieces_it;
 	char	*merge;
 
-	//fprintf(stderr, "making space for %d strings\n", count_vars(*str) * 2 + 2); //
 	pieces = ft_calloc(count_vars(*str) * 2 + 2, sizeof(char *));
 	if (pieces == 0)
-		return (err_alloc_fail);
+		return (error_msg(err_alloc_fail));
 	pieces_it = pieces;
 	error = create_pieces(*str, &pieces_it);
 	if (error)
-		return (cleanup(pieces, error));
+		return (cleanup(pieces, error_msg(error)));
 	error = transform_vars(pieces);
 	if (error)
-		return (cleanup(pieces, error));
+		return (cleanup(pieces, error_msg(error)));
 	merge = merge_pieces(pieces);
 	if (!merge)
-		return (cleanup(pieces, err_alloc_fail));
+		return (cleanup(pieces, error_msg(err_alloc_fail)));
 	free(*str);
 	*str = merge;
-	//cleanup(pieces, 0);
-	return (0);
+	return (cleanup(pieces, 0));
 }

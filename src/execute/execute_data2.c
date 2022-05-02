@@ -6,37 +6,18 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 18:04:06 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 16:10:18 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/02 06:14:05 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute_data2.h"
 
 #include <stddef.h>
+#include <stdlib.h>
 
 #include "execute_data.h"
 
-int	is_new_command(char *str)
-{
-	if (*str == '<')
-		return (1);
-	if (*str == '>')
-		return (1);
-	if (*str == '|')
-		return (1);
-	if (*str == '&')
-		return (1);
-	return (0);
-}
 
-int	is_redirection(char *str)
-{
-	if (*str == '<')
-		return (1);
-	if (*str == '>')
-		return (1);
-	return (0);
-}
 
 int	execute_data_count(char **words)
 {
@@ -53,7 +34,29 @@ int	execute_data_count(char **words)
 
 void	execute_data_cleanup(t_execute_data *data)
 {
-	(void) data;
+	int	i;
+
+	i = 0;
+	printf("argc is %d\n", data->argc);
+	while (data->argv[i])
+	{
+		free(data->argv[i]);
+		i++;
+	}
+	free(data->argv);
+	free(data);
+}
+
+void	execute_data_cleanup_multi(t_execute_data *data, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		execute_data_cleanup(data + i);
+		i++;
+	}
 }
 
 void	execute_data_init(t_execute_data *data, int fd_in, int fd_out)

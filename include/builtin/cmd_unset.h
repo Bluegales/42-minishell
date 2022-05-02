@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_export.h                                       :+:      :+:    :+:   */
+/*   cmd_unset.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/24 02:38:07 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/24 23:50:39 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/04/24 21:13:04 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/02 07:17:27 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CMD_EXPORT_H
-# define CMD_EXPORT_H
+#ifndef CMD_UNSET_H
+#define CMD_UNSET_H
 
-int	cmd_export(char *str, int in_fd, int out_fd);
+int	cmd_unset(int argc, char **argv);
 
-#endif // CMD_EXPORT_H
+#endif // CMD_UNSET_H

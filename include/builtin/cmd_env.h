@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   words_util.h                                       :+:      :+:    :+:   */
+/*   cmd_env.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/01 06:59:45 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 13:50:32 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/05/02 07:16:47 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/02 07:16:52 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORDS_UTIL_H
-# define WORDS_UTIL_H
+#ifndef CMD_ENV_H
+#define CMD_ENV_H
 
-int	is_logic_connector(char *str);
-int	is_command_connector(char *str);
-int	is_command(char *str);
+int	cmd_env(int argc, char **argv);
 
-#endif // WORDS_UTIL_H
+#endif // CMD_ENV_H

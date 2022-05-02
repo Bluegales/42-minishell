@@ -6,25 +6,28 @@
 #    By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/10 12:13:51 by pfuchs            #+#    #+#              #
-#    Updated: 2022/05/01 14:31:02 by pfuchs           ###   ########.fr        #
+#    Updated: 2022/05/02 07:32:29 by pfuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-VPATH = src src/environ src/helper src/parse src/execute
+FOLDERS = builtin environ execute execute_helper helper parse
+VPATH = src $(addprefix src/,builtin environ execute execute_helper helper parse)
 
 # Compiler Variables
 CC		= gcc
 CFLAGSS	= -Wall -Wextra -g #-Werror -g
-INCFLAG	= -I include -I include/parse -I include/execution -I libft
+INCFLAG	= -I include -I libft $(addprefix -I include/,$(FOLDERS))
 # File Variables
 NAME	= minishell
-SRC_N	= main minishell environ environ_2 cmds cmd_export \
-			error \
-			parse parse_vars parse_vars2 parse_remove_quotes \
-			parse_split_words parse_split_words2\
+SRC_N	= main minishell error\
+			builtin $(addprefix cmd_,cd echo env export pwd unset)\
+			environ environ_2\
 			execute execute_pipe execute_pipe2 execute_data execute_data2 \
-			redirect \
-			words_util
+			redirect\
+			set_path\
+			words_util\
+			parse parse_vars parse_vars2 parse_remove_quotes \
+			parse_split_words parse_split_words2
 SRC		= $(addsuffix .c,$(SRC_N))
 OBJ		= $(addprefix _bin/,$(notdir $(SRC:.c=.o)))
 
@@ -38,7 +41,7 @@ _bin :
 	mkdir _bin
 
 _bin/%.o : %.c | _bin
-	$(CC) -c $(CFLAGSS) -MMD -MP -g $(INCFLAG) $< -o $@
+	@$(CC) -c $(CFLAGSS) -MMD -MP -g $(INCFLAG) $< -o $@
 
 clean:
 	@rm -fr _bin

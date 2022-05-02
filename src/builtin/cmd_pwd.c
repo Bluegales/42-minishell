@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   cmd_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/29 00:17:20 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 03:52:05 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/05/02 06:47:49 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/02 07:32:42 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "cmd_pwd.h"
 
-#include <stdio.h>
-
-#include "libft.h"
-
-// enum e_error {
-// 	e_alloc_fail = 1,
-// 	e_parse = 2
-// };
-
-static const char	*g_error_msg[] = {
-	"error: important allocation failed\n",
-	"error: parsing failed",
-};
-
-int	error_msg(enum e_error error)
+int	cmd_pwd(int argc, char **argv)
 {
-	printf("%s\n", g_error_msg[error]);
-	return (error);
-	//exit(error);
+	(void) argc;
+	(void) argv;
+	return (0);
 }

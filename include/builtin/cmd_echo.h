@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmds.h                                             :+:      :+:    :+:   */
+/*   cmd_echo.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/24 20:46:30 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 07:57:21 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/05/02 06:54:18 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/02 06:54:19 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CMDS_H
-# define CMDS_H
+#ifndef CMD_ECHO_H
+#define CMD_ECHO_H
 
-# include "cmd_export.h"
+int	cmd_echo(int argc, char **argv);
 
-typedef int	(*t_cmd_function)(char *, int, int);
-
-t_cmd_function	get_function(char *command);
-
-#endif // CMDS_H
+#endif // CMD_ECHO_H

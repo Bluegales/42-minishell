@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   cmd_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/29 00:17:20 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 03:52:05 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/05/02 06:47:49 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/02 08:01:51 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "cmd_export.h"
 
-#include <stdio.h>
+#include "environ.h"
 
-#include "libft.h"
-
-// enum e_error {
-// 	e_alloc_fail = 1,
-// 	e_parse = 2
-// };
-
-static const char	*g_error_msg[] = {
-	"error: important allocation failed\n",
-	"error: parsing failed",
-};
-
-int	error_msg(enum e_error error)
+int	cmd_export(int argc, char **argv)
 {
-	printf("%s\n", g_error_msg[error]);
-	return (error);
-	//exit(error);
+	int	i;
+
+	i = 1;
+	while (i < argc)
+	{
+		environ_add(argv[i]);
+		i++;
+	}
+	while (i < argc)
+	{
+		printf("%s", argv[i]);
+		i++;
+		if (i != argc)
+			printf(" ");
+	}
+	if (new_line)
+		printf("\n");
+	return (0);
+	if (argc < 2)
 }

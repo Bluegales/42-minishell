@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 20:23:02 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 08:02:30 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/02 06:35:49 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	minishell()
 {
 	char			*buf;
 	char			**words;
-	//t_cmd_function	command_function;
 
 	if (environ_init())
 		return (1);
@@ -37,22 +36,27 @@ int	minishell()
 	{
 		buf = readline(promt);
 		add_history(buf);
-
+		if (!buf)
+			continue;
 		if (ft_strncmp(buf, "exit", 4) == 0)
 		{
 			free(buf);
-			//rl_clear_history();
+			rl_clear_history();
 			environ_cleanup();
 			return (0);
 		}
 		words = parse(buf);
-		execute(words);
-
+		printf("now executing\n");
+		if (*words != NULL)
+			execute(words);
+		int i = 0;
+		while (words[i])
+		{
+			free(words[i]);
+			i++;
+		}
+		free(words);
 		free(buf);
-		//command_function = get_function(buf);
-		//printf("got %p", command_function);
-		// if (command_function)
-		// 	command_function(buf);
 	}
 	return (0);
 }

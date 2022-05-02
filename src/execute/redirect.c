@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 15:44:56 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 20:22:09 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/02 03:51:57 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ int	redirect_output_append(t_execute_data *data, char *file)
 
 int	redirect(t_execute_data *data, char *str, char *next)
 {
+	return (0);
 	if (next == NULL)
 	{
-		error(err_parse);
+		error_msg(err_parse);
 		return (err_parse);
 	}
 	if (ft_strncmp(str, "<", 2) == 0)
@@ -75,6 +76,6 @@ int	redirect(t_execute_data *data, char *str, char *next)
 		return (redirect_output_file(data, next));
 	else if (ft_strncmp(str, ">>", 3) == 0)
 		return (redirect_output_append(data, next));
-	error(err_parse);
+	error_msg(err_parse);
 	return (err_parse);
 }

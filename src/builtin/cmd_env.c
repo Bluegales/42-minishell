@@ -1,16 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_builtin.c                                       :+:      :+:    :+:   */
+/*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/01 19:02:14 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 19:02:59 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/05/02 06:47:49 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/02 07:50:15 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_builtin(char *str)
+#include "cmd_env.h"
+
+#include "environ.h"
+
+int	cmd_env(int argc, char **argv)
 {
-	return (0);
+	(void) argc;
+	(void) argv;
+	environ_print();
 }

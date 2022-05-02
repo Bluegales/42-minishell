@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/29 00:17:20 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 03:52:05 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/05/02 07:41:48 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/02 07:49:04 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "execute_builtin.h"
 
 #include <stdio.h>
+#include <unistd.h>
 
-#include "libft.h"
+#include "execute_data.h"
+#include "builtin.h"
 
-// enum e_error {
-// 	e_alloc_fail = 1,
-// 	e_parse = 2
-// };
-
-static const char	*g_error_msg[] = {
-	"error: important allocation failed\n",
-	"error: parsing failed",
-};
-
-int	error_msg(enum e_error error)
+int	execute_builtin(t_execute_data *data)
 {
-	printf("%s\n", g_error_msg[error]);
-	return (error);
-	//exit(error);
+	if (!data->builtin)
+	{
+		fprintf(stderr, "builtin is NULL\n");
+		return (1);
+	}
+	data->builtin(data->argc, data->argv);
+	if (data->fd_in != STDIN_FILENO)
+		close(data->fd_in);
+	if (data->fd_out != STDOUT_FILENO)
+		close(data->fd_out);
+	return (0);
 }
