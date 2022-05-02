@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 03:49:08 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 18:45:53 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/02 09:03:17 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ static void	handle_connector(char ***words, int last_return)
 		if (ft_strncmp("||", **words, 3) == 0)
 		{
 			*words += 1;
-			if (!last_return)
+			if (last_return)
 				return ;
 			skip(words);
 		}
 		else if (ft_strncmp("&&", **words, 3) == 0)
 		{
 			*words += 1;
-			if (last_return)
+			if (!last_return)
 				return ;
 			skip(words);
 		}

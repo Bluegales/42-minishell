@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 06:47:49 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 08:01:51 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/02 08:23:31 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,4 @@ int	cmd_export(int argc, char **argv)
 		environ_add(argv[i]);
 		i++;
 	}
-	while (i < argc)
-	{
-		printf("%s", argv[i]);
-		i++;
-		if (i != argc)
-			printf(" ");
-	}
-	if (new_line)
-		printf("\n");
-	return (0);
-	if (argc < 2)
 }
