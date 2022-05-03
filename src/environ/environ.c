@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 22:52:53 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 01:23:38 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 10:56:23 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ void	environ_remove(char *entry)
 	if (!*g_environ)
 		return ;
 	free(g_environ);
-	free(g_environ + 1);
 	while (*g_environ)
 	{
 		*g_environ = *(g_environ + 1);
