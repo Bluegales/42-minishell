@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 20:23:02 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 06:35:49 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 13:31:19 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ int	minishell()
 		if (ft_strncmp(buf, "exit", 4) == 0)
 		{
 			free(buf);
-			rl_clear_history();
+			//rl_clear_history();
 			environ_cleanup();
 			return (0);
 		}
 		words = parse(buf);
-		printf("now executing\n");
+		//printf("now executing\n");
 		if (*words != NULL)
 			execute(words);
 		int i = 0;

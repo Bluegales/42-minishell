@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_env.c                                          :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 06:47:49 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 13:23:25 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/02/27 20:09:31 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/03/22 15:23:44 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd_env.h"
+#include "libft.h"
 
-#include "environ.h"
+#include <stddef.h> // NULL size_t
 
-int	cmd_env(int argc, char **argv)
+// Copies "n" bytes from memory area "src" to memory area "dest"
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	(void) argc;
-	(void) argv;
-	environ_print();
-	return (0);
+	unsigned char		*d;
+	const unsigned char	*s;
+
+	d = (unsigned char *)dest;
+	s = (const unsigned char *)src;
+	while (n)
+	{
+		*d = *s;
+		d++;
+		s++;
+		n--;
+	}
+	return (dest);
 }

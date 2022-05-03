@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_env.c                                          :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 06:47:49 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 13:23:25 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/02/05 23:22:49 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/03 13:04:40 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd_env.h"
+#include "libft.h" // ft_strlen
 
-#include "environ.h"
+#include <stddef.h> // NULL size_t
 
-int	cmd_env(int argc, char **argv)
+char	*ft_strcat(char *dest, const char *src)
 {
-	(void) argc;
-	(void) argv;
-	environ_print();
-	return (0);
+	char	*dest_it;
+
+	dest_it = dest;
+	while (*dest_it)
+		dest_it++;
+	while (*src)
+	{
+		*dest_it = *src;
+		dest_it++;
+		src++;
+	}
+	*dest_it = '\0';
+	return (dest);
 }

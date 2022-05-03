@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_env.c                                          :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfuchs <pfuchs@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 06:47:49 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 13:23:25 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/02/28 06:55:18 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/03/09 21:18:05 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd_env.h"
+#include "libft.h"
 
-#include "environ.h"
-
-int	cmd_env(int argc, char **argv)
+// Checks whether c is a decimal digit character.
+int	ft_isdigit(int c)
 {
-	(void) argc;
-	(void) argv;
-	environ_print();
+	if (c >= '0' && c <= '9')
+		return (1);
 	return (0);
 }

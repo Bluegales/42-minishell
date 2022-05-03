@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 07:40:24 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 07:36:59 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 13:43:07 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@
 #include "error.h"
 #include "set_path.h"
 
-
-static void	remove_quotes(char **words)
-{
-
-}
-
 static void	fork_setup_fd(t_execute_data *data, int in, int *pipe)
 {
 	close(pipe[0]);
@@ -44,7 +38,7 @@ static void	fork_setup_fd(t_execute_data *data, int in, int *pipe)
 		dup2(pipe[1], STDOUT_FILENO);
 	else
 		close(pipe[1]);
-	fprintf(stderr, "running execve\n");
+	//fprintf(stderr, "running execve\n");
 	execve(data->command_path, data->argv, g_environ);
 	perror(error_prefix);
 	kill(getpid(), SIGINT);
@@ -56,13 +50,13 @@ int	run_pipe_last(t_execute_data *data, int in)
 
 	if (data->builtin)
 	{
-		fprintf(stderr, "I am a builtin!\n");
+		//fprintf(stderr, "I am a builtin!\n");
 		if (data->fd_in == STDIN_FILENO)
 			dup2(in, STDIN_FILENO);
 		else
 			close(in);
 		data->builtin(data->argc, data->argv);
-		return ;
+		return 0;
 	}
 	if (set_command_path(data))
 		return (err_command);
@@ -73,7 +67,7 @@ int	run_pipe_last(t_execute_data *data, int in)
 			dup2(in, STDIN_FILENO);
 		else
 			close(in);
-		fprintf(stderr, "running last execve\n");
+		//fprintf(stderr, "running last execve\n");
 		execve(data->command_path, data->argv, g_environ);
 		perror(error_prefix);
 		kill(getpid(), SIGINT);
@@ -95,6 +89,7 @@ int	setup_fd(t_execute_data *data, int in, int *pipe)
 		dup2(pipe[1], STDOUT_FILENO);
 	else
 		close(pipe[1]);
+	return (0);
 }
 
 static int	run_pipe(t_execute_data *data, int count)
@@ -114,7 +109,7 @@ static int	run_pipe(t_execute_data *data, int count)
 			return (err_command);
 		if (data->builtin)
 		{
-			fprintf(stderr, "I am a builtin!\n");
+			//fprintf(stderr, "I am a builtin!\n");
 			setup_fd(data + i, next_in, my_pipe);
 			data->builtin(data->argc, data->argv);
 			continue;
@@ -124,7 +119,7 @@ static int	run_pipe(t_execute_data *data, int count)
 			pid = fork();
 			if (pid == 0)
 			{
-			fprintf(stderr, "I am a fork!\n");
+			//fprintf(stderr, "I am a fork!\n");
 			close(my_pipe[0]);
 			fork_setup_fd(data + i, next_in, my_pipe);
 			}
@@ -150,18 +145,17 @@ static int	wait_for_children(int count, int *return_val)
 		waitpid(-1, return_val, 0);
 		i++;
 	}
-	printf("returned with value %d\n", *return_val);
+	//printf("returned with value %d\n", *return_val);
 	return (0);
 }
 
 int	execute_pipe(char ***words, int *return_val)
 {
-	int				error;
 	int				i;
 	t_execute_data	*data;
 	int				pipe_count;
 
-	fprintf(stderr, "executing pipe:\n  ");
+	//fprintf(stderr, "executing pipe:\n  ");
 	pipe_count = count_pipes(*words);
 	data = ft_calloc(1 + pipe_count, sizeof(t_execute_data));
 	if (!data)

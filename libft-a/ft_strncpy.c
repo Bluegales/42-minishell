@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_env.c                                          :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 06:47:49 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 13:23:25 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/05/03 12:37:39 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/05/03 13:02:56 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd_env.h"
+#include "libft.h"
 
-#include "environ.h"
+#include <stddef.h>
 
-int	cmd_env(int argc, char **argv)
+char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
-	(void) argc;
-	(void) argv;
-	environ_print();
-	return (0);
+	char	*dest_it;
+
+	dest_it = dest;
+	while (*src && n)
+	{
+		*dest_it = *src;
+		dest_it++;
+		src++;
+		n--;
+	}
+	if (n)
+		*dest_it = '\0';
+	return (dest);
 }

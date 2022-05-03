@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 19:08:28 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 10:19:01 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 12:19:29 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 #include <unistd.h>
 #include <stdio.h>
+
+#include <semaphore.h>
 
 #include "execute_data.h"
 #include "environ.h"
@@ -53,7 +55,7 @@ int	set_command_path(t_execute_data *data)
 	paths = environ_get("PATH");
 	if (paths)
 	{
-		split = ft_split(paths, ':');
+		split = ft_strsplit(paths, ':');
 		if (!split)
 			return (error_msg(err_alloc_fail));
 		find_correct_path(data, split);

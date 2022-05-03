@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 18:04:06 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 06:14:05 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 13:25:50 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "execute_data.h"
 

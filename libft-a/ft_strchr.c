@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_env.c                                          :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 06:47:49 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 13:23:25 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/02/28 03:51:02 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/03/31 22:02:37 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd_env.h"
+#include "libft.h"
 
-#include "environ.h"
+#include <stddef.h> // NULL size_t
 
-int	cmd_env(int argc, char **argv)
+// Returns the first occurence of "c" in "str"
+char	*ft_strchr(const char *str, int c)
 {
-	(void) argc;
-	(void) argv;
-	environ_print();
-	return (0);
+	while (*str != (char)c)
+	{
+		if (*str == '\0')
+			return (NULL);
+		str++;
+	}
+	return ((char *)str);
 }

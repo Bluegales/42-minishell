@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 22:37:19 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 04:19:44 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 13:24:38 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static int	create_piece(const char **str, int offset, char ***pieces_it)
 	if (offset)
 	{
 		//fprintf(stderr, "makign piece: <%.*s>\n", offset, *str); //
-		**pieces_it = ft_substr(*str, 0, offset);
+		**pieces_it = ft_strsub(*str, 0, offset);
 		if (!**pieces_it)
 			return (err_alloc_fail);
 		(*pieces_it)++;
@@ -113,7 +113,7 @@ static int	create_piece(const char **str, int offset, char ***pieces_it)
 				|| (offset == 1 && (*str)[offset] == '?'))
 			offset++;
 		//fprintf(stderr, "makign piece: <%.*s>\n", offset, *str); //
-		**pieces_it = ft_substr(*str, 0, offset);
+		**pieces_it = ft_strsub(*str, 0, offset);
 		if (!**pieces_it)
 			return (err_alloc_fail);
 		(*pieces_it)++;

@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 00:17:20 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 03:52:05 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 13:29:03 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 static const char	*g_error_msg[] = {
 	"error: important allocation failed\n",
 	"error: parsing failed",
+	"no",
+	"no",
+	"nooo",
+	"nooo"
 };
 
 int	error_msg(enum e_error error)

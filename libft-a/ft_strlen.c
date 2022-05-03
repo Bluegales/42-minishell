@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_env.c                                          :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 06:47:49 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 13:23:25 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/02/02 14:45:31 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/03/22 15:17:00 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd_env.h"
+#include "libft.h"
 
-#include "environ.h"
+#include <stddef.h> // NULL size_t
 
-int	cmd_env(int argc, char **argv)
+// returns the length of str
+size_t	ft_strlen(const char *str)
 {
-	(void) argc;
-	(void) argv;
-	environ_print();
-	return (0);
+	const char	*ptr;
+
+	ptr = str;
+	while (*ptr)
+		ptr++;
+	return (ptr - str);
 }

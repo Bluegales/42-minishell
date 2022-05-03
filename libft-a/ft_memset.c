@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_export.c                                       :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfuchs <pfuchs@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 06:47:49 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 13:23:36 by pfuchs           ###   ########.fr       */
+/*   Created: 2022/02/27 15:01:40 by pfuchs            #+#    #+#             */
+/*   Updated: 2022/03/22 16:45:03 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd_export.h"
+#include "libft.h"
 
-#include "environ.h"
+#include <stddef.h> // NULL size_t
 
-int	cmd_export(int argc, char **argv)
+// Sets "n" bytes from "mem" to "c"
+void	*ft_memset(void *mem, int c, size_t n)
 {
-	int	i;
+	unsigned char	*dest;
 
-	i = 1;
-	while (i < argc)
+	dest = (unsigned char *)mem;
+	while (n)
 	{
-		environ_add(argv[i]);
-		i++;
+		*dest = (unsigned char)c;
+		dest++;
+		n--;
 	}
-	return (0);
+	return (mem);
 }
