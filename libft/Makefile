@@ -6,7 +6,7 @@
 #    By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/14 02:09:09 by pfuchs            #+#    #+#              #
-#    Updated: 2022/05/03 13:22:07 by pfuchs           ###   ########.fr        #
+#    Updated: 2022/05/03 16:24:42 by pfuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ MAIN	= isalpha isdigit isalnum isascii isprint strlen\
 		strcpy strncpy strlcpy strcat strlcat strnstr strchr strrchr strncmp\
 		strdup strsub strjoin strtrim strsplit\
 		atoi itoa calloc\
-		free_pointer_array
+		free_pointer_array strjoin_array
 MAINFILES	= $(addprefix ft_,$(addsuffix .c, $(MAIN)))
 OBJ	= $(addprefix _bin/,$(MAINFILES:.c=.o))
 

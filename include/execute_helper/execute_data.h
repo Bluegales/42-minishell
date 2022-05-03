@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 16:24:08 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 07:34:13 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 19:00:21 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_execute_data
 	t_builtin_main	builtin;
 	int		argc;
 	char	**argv;
-	char	*executable;
+	// char	*executable;
 
 	char	command_path[PATH_MAX];
 }	t_execute_data;

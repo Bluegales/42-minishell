@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 00:19:01 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 08:39:23 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 18:12:33 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ enum e_error {
 	err_pipe = 3,
 	err_child_back = 4,
 	err_command = 5,
-	err_manny_arguments = 6
+	err_manny_arguments = 6,
+	err_fork = 7
 };
 
 int	error_msg(enum e_error error_msg);

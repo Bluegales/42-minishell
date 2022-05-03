@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 06:46:08 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 13:16:22 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 16:07:56 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,8 @@ char		*ft_itoa(int n);
 
 // Frees null pointer terminated array
 void		ft_free_pointer_array(void	**array);
+// Returns a freeable string of the strings joined
+// If seperator is NULL it will be handled as an empty string
+char		*ft_strjoin_array(char **split, char *seperator);
 
 #endif

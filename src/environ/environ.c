@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 22:52:53 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 10:56:23 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 16:43:44 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@
 
 #include "libft.h"
 
-#include <stdio.h>
-
 static int	key_comp(char *key1, char *key2)
 {
-	//printf("%s, %s\n", key1, key2);
 	while (*key1 && *key2 && *key1 != '=')
 	{
 		if (*key1 != *key2)
@@ -46,7 +43,6 @@ static int	environ_add_copy(char **old, char *new)
 		return (1);
 	free(*old);
 	*old = new_entry;
-
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 06:47:49 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 09:00:51 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:10:19 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 #include <unistd.h> // chdir
 #include <stdio.h> // perror
-//#include <errno.h> // perror
 
 #include "error.h"
 #include "environ.h" // HOME

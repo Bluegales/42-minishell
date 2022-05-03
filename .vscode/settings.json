@@ -16,6 +16,7 @@
 		"stdexcept": "c",
 		"streambuf": "c",
 		"functional": "c",
-		"semaphore.h": "c"
+		"semaphore.h": "c",
+		"execute_builtin.h": "c"
 	}
 }

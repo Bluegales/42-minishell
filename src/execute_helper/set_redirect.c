@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect.c                                         :+:      :+:    :+:   */
+/*   set_redirect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 15:44:56 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 03:51:57 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 19:46:00 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@
 
 int	redirect_input_file(t_execute_data *data, char *file)
 {
-	data->fd_in = open(file, O_RDONLY | O_CLOEXEC);
-	if (data->fd_in == -1)
+	int	fd;
+
+	fd = open(file, O_RDONLY | O_CLOEXEC, 0644);
+	if (fd == -1)
 	{
-		perror(NULL);
+		perror(file);
 		return (1);
 	}
+	data->fd_out = fd;
 	return (0);
 }
 
@@ -40,29 +43,39 @@ int	redirect_input_console(t_execute_data *data, char *delim)
 
 int	redirect_output_file(t_execute_data *data, char *file)
 {
-	data->fd_out = open(file, O_WRONLY | O_CREAT);
-	if (data->fd_out == -1)
+	int	fd;
+
+	printf("output\n");
+	fd = open(file, O_WRONLY | O_CREAT , 0666);
+	if (fd == -1)
 	{
-		perror(NULL);
+		printf("-%s-\n", file);
+		write(2, file, 20);
+		perror(file);
+		printf("NOOOPE\n");
 		return (1);
 	}
+	printf("output\n");
+	data->fd_out = fd;
 	return (0);
 }
 
 int	redirect_output_append(t_execute_data *data, char *file)
 {
-	data->fd_out = open(file, O_WRONLY | O_CREAT | O_APPEND);
-	if (data->fd_out == -1)
+	int	fd;
+
+	fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (fd == -1)
 	{
-		perror(NULL);
+		perror(file);
 		return (1);
 	}
+	data->fd_out = fd;
 	return (0);
 }
 
 int	redirect(t_execute_data *data, char *str, char *next)
 {
-	return (0);
 	if (next == NULL)
 	{
 		error_msg(err_parse);

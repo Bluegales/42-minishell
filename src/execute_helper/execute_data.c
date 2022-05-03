@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 03:49:08 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 10:32:17 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 19:29:52 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdlib.h> // free
 
 #include "execute_data2.h"
+#include "set_path.h"
 #include "words_util.h"
 #include "error.h"
 #include "redirect.h"
@@ -31,8 +32,6 @@ static int	handle_redirection(t_execute_data *data, char ***str)
 	error = redirect(data, **str, **str + 1);
 	if (error)
 		return (1);
-	//if (ft_strncmp(**str, "<<", 3) == 0 || ft_strncmp(**str, ">>", 3) == 0)
-	//	*str += 1;
 	*str += 2;
 	return (0);
 }
@@ -75,6 +74,8 @@ static int	add_argv(t_execute_data *data, char *str)
 	return (0);
 }
 
+// sets the correct data for a single command incrementing words by that amount
+// (will stop at pipe and connectors)
 int	execute_data_create(t_execute_data *data, char ***words)
 {
 	int		error;
@@ -84,6 +85,7 @@ int	execute_data_create(t_execute_data *data, char ***words)
 	{
 		while (**words && is_redirection(**words))
 		{
+			printf("is redirection\n");
 			error = handle_redirection(data, words);
 			if (error)
 			{
@@ -92,7 +94,7 @@ int	execute_data_create(t_execute_data *data, char ***words)
 			}
 		}
 		if (!**words)
-			break;
+			break ;
 		error = add_argv(data, **words);
 		if (error)
 		{
@@ -102,6 +104,8 @@ int	execute_data_create(t_execute_data *data, char ***words)
 		*words += 1;
 	}
 	data->builtin = get_builtin(data->argv[0]);
+	if (set_command_path(data))
+		return (error_msg(err_command));
 	debug_execution_data(data);
 	return (0);
 }

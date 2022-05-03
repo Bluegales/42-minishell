@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 19:08:28 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 12:19:29 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 16:43:04 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 #include <unistd.h>
 #include <stdio.h>
-
-#include <semaphore.h>
 
 #include "execute_data.h"
 #include "environ.h"

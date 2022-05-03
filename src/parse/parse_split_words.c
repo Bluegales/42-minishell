@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 02:57:32 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 13:25:35 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:45:26 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,10 @@ static char	**split_words(const char *str, const char *delims)
 	it = splits;
 	while (*str)
 	{
-		//printf("next location: <%s>\n", str);
 		*it = ft_strsub(str, 0, split_length(str, delims));
 		if (!*it)
 			return (cleanup_splits(it));
 		str += split_length(str, delims);
-		//printf("string: <%s>\n", *it);
 		str = next_split_location(str, delims);
 		it++;
 	}

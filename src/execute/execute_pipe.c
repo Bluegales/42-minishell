@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 07:40:24 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 13:43:07 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 19:05:58 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@
 #include "execute_pipe2.h"
 #include "words_util.h"
 #include "execute_data.h"
+#include "execute_builtin.h"
 #include "libft.h"
 #include "environ.h"
 #include "error.h"
 #include "set_path.h"
 
-static void	fork_setup_fd(t_execute_data *data, int in, int *pipe)
+static void	fork_setup(t_execute_data *data, int in, int *pipe)
 {
 	close(pipe[0]);
 	if (data->fd_in == STDIN_FILENO)
@@ -50,13 +51,12 @@ int	run_pipe_last(t_execute_data *data, int in)
 
 	if (data->builtin)
 	{
-		//fprintf(stderr, "I am a builtin!\n");
 		if (data->fd_in == STDIN_FILENO)
 			dup2(in, STDIN_FILENO);
 		else
 			close(in);
 		data->builtin(data->argc, data->argv);
-		return 0;
+		return (0);
 	}
 	if (set_command_path(data))
 		return (err_command);
@@ -67,7 +67,6 @@ int	run_pipe_last(t_execute_data *data, int in)
 			dup2(in, STDIN_FILENO);
 		else
 			close(in);
-		//fprintf(stderr, "running last execve\n");
 		execve(data->command_path, data->argv, g_environ);
 		perror(error_prefix);
 		kill(getpid(), SIGINT);
@@ -92,6 +91,22 @@ int	setup_fd(t_execute_data *data, int in, int *pipe)
 	return (0);
 }
 
+static void	builtin_setup(t_execute_data *data, int in, int *pipe)
+{
+	int	stdpipe[2];
+
+	dup2(STDIN_FILENO, stdpipe[0]);
+	dup2(STDOUT_FILENO, stdpipe[1]);
+	setup_fd(data, in, pipe);
+	execute_builtin(data);
+	dup2(stdpipe[0], STDIN_FILENO);
+	dup2(stdpipe[1], STDOUT_FILENO);
+	if (data->fd_in != STDIN_FILENO)
+		close(data->fd_in);
+	if (data->fd_out != STDOUT_FILENO)
+		close(data->fd_out);
+}
+
 static int	run_pipe(t_execute_data *data, int count)
 {
 	int		i;
@@ -105,24 +120,16 @@ static int	run_pipe(t_execute_data *data, int count)
 	{
 		if (pipe(my_pipe))
 			return (error_msg(err_pipe));
-		if (set_command_path(data + i))
-			return (err_command);
+		setup_fd(data + i, next_in, my_pipe);
 		if (data->builtin)
-		{
-			//fprintf(stderr, "I am a builtin!\n");
-			setup_fd(data + i, next_in, my_pipe);
-			data->builtin(data->argc, data->argv);
-			continue;
-		}
+			builtin_setup(data, next_in, my_pipe);
 		else
 		{
 			pid = fork();
 			if (pid == 0)
-			{
-			//fprintf(stderr, "I am a fork!\n");
-			close(my_pipe[0]);
-			fork_setup_fd(data + i, next_in, my_pipe);
-			}
+				fork_setup(data + i, next_in, my_pipe);
+			if (pid == -1)
+				return (error_msg(err_fork));
 		}
 		if (next_in != 0)
 			close(next_in);

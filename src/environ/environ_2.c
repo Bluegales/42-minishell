@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 20:39:17 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 18:57:44 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 16:43:33 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	environ_cleanup(void)
 		it++;
 	}
 	free(g_environ);
-	//g_environ = NULL;
 }
 
 int	environ_init(void)
@@ -40,14 +39,12 @@ int	environ_init(void)
 	char	**it;
 
 	it = environ;
-	//printf("it: %p, environ: %pn\n", it, environ);
 	g_environ = malloc(sizeof(char *));
 	if (!g_environ)
 		return (1);
 	*g_environ = NULL;
 	while (*it)
 	{
-		//printf("adding %s\n", *it);
 		if (environ_add(*it))
 		{
 			return (1);

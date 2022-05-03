@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 18:04:06 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 13:25:50 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 19:12:14 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #include <stdio.h>
 
 #include "execute_data.h"
-
-
 
 int	execute_data_count(char **words)
 {
@@ -38,7 +36,6 @@ void	execute_data_cleanup(t_execute_data *data)
 	int	i;
 
 	i = 0;
-	printf("argc is %d\n", data->argc);
 	while (data->argv[i])
 	{
 		free(data->argv[i]);
@@ -76,11 +73,11 @@ void	debug_execution_data(t_execute_data *data)
 {
 	int i = 0;
 
-	printf("arguments:  ");
+	printf("arguments:   ");
 	while (i < data->argc)
 	{
-		printf("  %s -", data->argv[i]);
+		printf("-%s-", data->argv[i]);
 		i++;
 	}
-	printf("\n");
+	printf("\nin: %d  out: %d\n", data->fd_in, data->fd_out);
 }

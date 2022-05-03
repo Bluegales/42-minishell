@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 10:00:39 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/01 00:08:29 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 16:40:13 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ const char	*next_split_location(const char *str, const char *delims)
 
 static int	get_quote(char c, char quote)
 {
-	//printf("testing char %c on quote: %c\n", c, quote);
 	if (c == '\'' && quote != '\"')
 	{
 		if (quote == '\'')
@@ -72,23 +71,19 @@ int	split_length(const char *str, const char *delims)
 
 	i = 0;
 	quote = 0;
-	//printf("getting length for %s\n", str);
 	while (str[i])
 	{
 		quote = get_quote(str[i], quote);
-		//printf("quote: %c", quote);
 		if (!quote)
 		{
 			length = split_length2(str, delims, i);
 			if (length != -1)
 			{
-				//printf("found length: %d\n", length);
 				return (length);
 			}
 		}
 		i++;
 	}
-	//printf("end of string %d\n", i);
 	return (i);
 }
 
@@ -102,10 +97,7 @@ int	count_splits(const char *str, const char *delims)
 		while (*str && ft_strchr(delims, *str))
 			str++;
 		if (*str == '\0')
-		{
-			//printf("counted %d splits\n", splits);
 			return (splits);
-		}
 		str += split_length(str, delims);
 		splits++;
 	}

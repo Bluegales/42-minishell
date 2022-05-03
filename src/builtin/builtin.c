@@ -6,7 +6,7 @@
 /*   By: pfuchs <pfuchs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 19:02:14 by pfuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 07:33:08 by pfuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:10:08 by pfuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ typedef struct s_command_function_pair
 }	t_command_function_pair;
 
 static const t_command_function_pair	g_commands[] = {
-	{"cd", cmd_cd},
-	{"echo", cmd_echo},
-	{"env", cmd_env},
-	{"export", cmd_export},
-	{"pwd", cmd_pwd},
-	{"unset", cmd_unset}
+{"cd", cmd_cd},
+{"echo", cmd_echo},
+{"env", cmd_env},
+{"export", cmd_export},
+{"pwd", cmd_pwd},
+{"unset", cmd_unset}
 };
 
 t_builtin_main	get_builtin(char *command)
